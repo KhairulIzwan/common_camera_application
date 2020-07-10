@@ -30,7 +30,10 @@ class CameraPreview:
 		self.bridge = CvBridge()
 		self.image_received = False
 
-		rospy.on_shutdown(self.shutdown)
+		rospy.logwarn("CameraPreview Node [ONLINE]...")
+
+		# rospy shutdown
+		rospy.on_shutdown(self.cbShutdown)
 
 		# Subscribe to Image msg
 		self.image_topic = "/cv_camera/image_raw"
@@ -41,28 +44,30 @@ class CameraPreview:
 		self.cameraInfo_sub = rospy.Subscriber(self.cameraInfo_topic, CameraInfo, 
 			self.cbCameraInfo)
 
-		rospy.logwarn("CameraPreview Node [ONLINE]...")
-
 		# Allow up to one second to connection
 		rospy.sleep(1)
 
+	# Convert image to OpenCV format
 	def cbImage(self, msg):
 
-		# Convert image to OpenCV format
 		try:
 			self.cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
 		except CvBridgeError as e:
 			print(e)
 
-		self.image_received = True
+		if self.cv_image is not None:
+			self.image_received = True
+		else:
+			self.image_received = False
 
+	# Get CameraInfo
 	def cbCameraInfo(self, msg):
 
-		# Get CameraInfo
 		self.imgWidth = msg.width
 		self.imgHeight = msg.height
 
-	def showInfo(self):
+	# Image information callback
+	def cbInfo(self):
 
 		fontFace = cv2.FONT_HERSHEY_DUPLEX
 		fontScale = 0.5
@@ -83,20 +88,24 @@ class CameraPreview:
 			(self.imgWidth-100, self.imgHeight-10), fontFace, fontScale, 
 			color, thickness, lineType, bottomLeftOrigin)
 
-	# show the output image and the final shape count
-	def preview(self):
+	# Show the output frame
+	def cbShowImage(self):
+
+		cv2.imshow("CameraPreview", self.cv_image)
+		cv2.waitKey(1)
+
+	# Preview image + info
+	def cbPreview(self):
 
 		if self.image_received:
-			self.showInfo()
-
-			# show the output frame
-			cv2.imshow("CameraPreview", self.cv_image)
-			cv2.waitKey(1)
-
+			self.cbInfo()
+			self.cbShowImage()
 		else:
 			rospy.logerr("No images recieved")
 
-	def shutdown(self):
+	# rospy shutdown callback
+	def cbShutdown(self):
+
 		rospy.logerr("CameraPreview Node [OFFLINE]...")
 		cv2.destroyAllWindows()
 
@@ -108,4 +117,4 @@ if __name__ == '__main__':
 
 	# Camera preview
 	while not rospy.is_shutdown():
-		camera.preview()
+		camera.cbPreview()
