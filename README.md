@@ -36,4 +36,4 @@ step to overcome the error :
 sb : source ~/.bashrc
 eb : gedit ~/.bashrc
 
-
+**NOTES**
