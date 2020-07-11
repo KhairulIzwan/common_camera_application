@@ -45,7 +45,7 @@ class CameraPreview:
 			self.cbCameraInfo)
 
 		# Allow up to one second to connection
-		rospy.sleep(1)
+		rospy.sleep(2)
 
 	# Convert image to OpenCV format
 	def cbImage(self, msg):
