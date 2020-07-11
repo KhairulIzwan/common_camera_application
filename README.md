@@ -39,6 +39,10 @@ step to overcome the error :
 sb : source ~/.bashrc
 eb : gedit ~/.bashrc
 
+<<<<<<< HEAD
 if we combine 2 version of python, we need to sb first
 
 
+=======
+**NOTES**
+>>>>>>> aa5c9ca855e101b081a3c6ae9c38af05099bf1bd
