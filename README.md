@@ -15,6 +15,9 @@ Require(s):
 2. run preview package(to display the preview)
  command : rosrun common_camera_application camera_preview.py
 
+3. jump to the preview package 
+ command : roslaunch common_camera_application camera_preview.launch
+
 **STEP TO UPDATE INTO GITHUB**
 
 1. go to the package 
@@ -35,5 +38,7 @@ step to overcome the error :
 
 sb : source ~/.bashrc
 eb : gedit ~/.bashrc
+
+if we combine 2 version of python, we need to sb first
 
 
