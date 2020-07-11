@@ -6,7 +6,7 @@ Common camera (usb-camera, web-cam, raspberry pi, etc) application packages.
 Require(s):
 1. https://github.com/OTL/cv_camera.git
 
-**HOW TO USE**
+**STEP TO TURN ON THE CAMERA**
 
 
 1. run camera package(only turn on the camera)
@@ -14,6 +14,16 @@ Require(s):
 
 2. run preview package(to display the preview)
  command : rosrun common_camera_application camera_preview.py
+
+**STEP TO UPDATE INTO GITHUB**
+
+1. go to the package 
+  command : roscd comman_camera_application
+
+2. run the github command
+   command : git push
+
+3. enter the username and password
 
 
 
@@ -24,4 +34,6 @@ roslaunch/rosrun "package" "file"
 step to overcome the error :
 
 sb : source ~/.bashrc
-eb :
+eb : gedit ~/.bashrc
+
+
