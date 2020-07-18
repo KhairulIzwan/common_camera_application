@@ -100,6 +100,9 @@ class CameraPreview:
 		if self.image_received:
 			self.cbInfo()
 			self.cbShowImage()
+			
+			# Allow up to one second to connection
+			rospy.sleep(0.1)
 		else:
 			rospy.logerr("No images recieved")
 
