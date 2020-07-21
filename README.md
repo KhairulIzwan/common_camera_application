@@ -17,8 +17,7 @@
 
 ```
 
-Created package useful in order for testing the basic usage of camera; previewing.
-Applicable for various types of camera -- usb-camera, web-cam, raspberry pi, etc
+Created package useful for testing the basic usage of a camera; previewing. Applicable for various types of a camera -- USB-camera, web-cam, raspberry pi, etc
 
 **Notes**
 Require(s):
