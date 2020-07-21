@@ -24,6 +24,7 @@
 	├
 	└── camera_robot2_preview.py
 
+```
 .
 +-- _config.yml
 +-- _drafts
@@ -42,6 +43,7 @@
 |   +-- members.yml
 +-- _site
 +-- index.html
+```
 
 Created package useful in order for testing the basic usage of camera; previewing.
 Applicable for various types of camera -- usb-camera, web-cam, raspberry pi, etc
