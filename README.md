@@ -1,6 +1,20 @@
 # common_camera_application
 
-Common camera (usb-camera, web-cam, raspberry pi, etc) application packages.
+├── CMakeLists.txt
+├── launch
+│   ├── camera_preview.launch
+│   ├── camera_robot1.launch
+│   ├── camera_robot2.launch
+│   └── camera_robot.launch
+├── package.xml
+├── README.md
+└── script
+    ├── camera_preview.py
+    ├── camera_robot1_preview.py
+    └── camera_robot2_preview.py
+
+Created package useful in order for testing the basic usage of camera; previewing.
+Applicable for various types of camera -- usb-camera, web-cam, raspberry pi, etc
 
 **Notes**
 Require(s):
@@ -8,41 +22,28 @@ Require(s):
 
 **STEP TO TURN ON THE CAMERA**
 
+1. **Turn ON the camera**
+	*command* : roslaunch common_camera_application camera_robot.launch 
 
-1. run camera package(only turn on the camera)
- command : roslaunch common_camera_application camera_robot.launch 
+2. **Preview-ing**
+	*command* : rosrun common_camera_application camera_preview.py
 
-2. run preview package(to display the preview)
- command : rosrun common_camera_application camera_preview.py
+3. **Simplified -- Turn On Camera + Preview** 
+	*command* : roslaunch common_camera_application camera_preview.launch
 
-3. jump to the preview package 
- command : roslaunch common_camera_application camera_preview.launch
+**Extra(s)**
+*STEP TO UPDATE INTO GITHUB*
 
-**STEP TO UPDATE INTO GITHUB**
+1. **change directory (cd) directly to a package or a stack.**
+	*command* : roscd [locationname[/subdir]]
+	*example* : roscd common_camera_application
 
-1. go to the package 
-  command : roscd comman_camera_application
+2. **push the repository** -- only if you are invited to the repository
+	**warning** you may need to update *./bashrc* with source it:
+		alias gs='git status'
+		alias gp='git pull'
+		NOW=$(date +"%m-%d-%Y-%T")
+		alias gu='gp && git add . && git commit -m "Updated on $NOW" && git push origin master'
+	*command* : gu
 
-2. run the github command
-   command : git push
-
-3. enter the username and password
-
-
-
-format of rosrun/roslaunch :
-roslaunch/rosrun "package" "file"
-
-
-step to overcome the error :
-
-sb : source ~/.bashrc
-eb : gedit ~/.bashrc
-
-<<<<<<< HEAD
-if we combine 2 version of python, we need to sb first
-
-
-=======
-**NOTES**
->>>>>>> aa5c9ca855e101b081a3c6ae9c38af05099bf1bd
+3. **enter the username and password**
