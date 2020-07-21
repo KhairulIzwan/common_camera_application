@@ -52,6 +52,8 @@ class CameraPreview:
 
 		try:
 			self.cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
+
+			# comment if the image is mirrored
 			self.cv_image = cv2.flip(self.cv_image, 1)
 		except CvBridgeError as e:
 			print(e)
