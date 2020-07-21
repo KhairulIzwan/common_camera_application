@@ -1,28 +1,28 @@
 # common_camera_application
 
 ├── CMakeLists.txt
-
+├
 ├── launch
-
-│   ├── camera_preview.launch
-
-│   ├── camera_robot1.launch
-
-│   ├── camera_robot2.launch
-
-│   └── camera_robot.launch
-
+├	├
+│	├── camera_preview.launch
+├	├
+│	├── camera_robot1.launch
+├	├
+│	├── camera_robot2.launch
+├	├
+│	└── camera_robot.launch
+├
 ├── package.xml
-
+├
 ├── README.md
-
+├
 └── script
-
-    ├── camera_preview.py
-
-    ├── camera_robot1_preview.py
-
-    └── camera_robot2_preview.py
+	├
+	├── camera_preview.py
+	├
+	├── camera_robot1_preview.py
+	├
+	└── camera_robot2_preview.py
 
 Created package useful in order for testing the basic usage of camera; previewing.
 Applicable for various types of camera -- usb-camera, web-cam, raspberry pi, etc
