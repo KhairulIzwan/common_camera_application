@@ -1,16 +1,27 @@
 # common_camera_application
 
 ├── CMakeLists.txt
+
 ├── launch
+
 │   ├── camera_preview.launch
+
 │   ├── camera_robot1.launch
+
 │   ├── camera_robot2.launch
+
 │   └── camera_robot.launch
+
 ├── package.xml
+
 ├── README.md
+
 └── script
+
     ├── camera_preview.py
+
     ├── camera_robot1_preview.py
+
     └── camera_robot2_preview.py
 
 Created package useful in order for testing the basic usage of camera; previewing.
@@ -47,6 +58,7 @@ Require(s):
 2. **push the repository** -- only if you are invited to the repository
 
 	**warning** you may need to update *./bashrc* with source it:
+
 		alias gs='git status'
 
 		alias gp='git pull'
