@@ -92,7 +92,7 @@ class CameraPreview:
 	# Show the output frame
 	def cbShowImage(self):
 
-		cv2.imshow("CameraPreview", self.cv_image)
+		cv2.imshow("CameraPreview Robot 1", self.cv_image)
 		cv2.waitKey(1)
 
 	# Preview image + info
