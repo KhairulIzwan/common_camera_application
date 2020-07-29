@@ -116,7 +116,7 @@ class CameraPreview:
 if __name__ == '__main__':
 
 	# Initialize
-	rospy.init_node('camera_preview', anonymous=False)
+	rospy.init_node('camera_preview_2', anonymous=False)
 	camera = CameraPreview()
 
 	# Camera preview
