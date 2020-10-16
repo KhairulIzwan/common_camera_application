@@ -13,6 +13,7 @@ from __future__ import print_function
 import sys
 import cv2
 import time
+import imutils
 
 # import the necessary ROS packages
 from std_msgs.msg import String
@@ -36,11 +37,13 @@ class CameraPreview:
 		rospy.on_shutdown(self.cbShutdown)
 
 		# Subscribe to Image msg
-		self.image_topic = "/cv_camera/image_raw"
+#		self.image_topic = "/cv_camera/image_raw"
+		self.image_topic = "/camera/rgb/image_raw"
 		self.image_sub = rospy.Subscriber(self.image_topic, Image, self.cbImage)
 
 		# Subscribe to CameraInfo msg
-		self.cameraInfo_topic = "/cv_camera/camera_info"
+#		self.cameraInfo_topic = "/cv_camera/camera_info"
+		self.cameraInfo_topic = "/camera/rgb/camera_info"
 		self.cameraInfo_sub = rospy.Subscriber(self.cameraInfo_topic, CameraInfo, 
 			self.cbCameraInfo)
 
@@ -54,7 +57,7 @@ class CameraPreview:
 			self.cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
 
 			# comment if the image is mirrored
-			self.cv_image = cv2.flip(self.cv_image, 1)
+#			self.cv_image = cv2.flip(self.cv_image, 1)
 		except CvBridgeError as e:
 			print(e)
 
@@ -93,8 +96,12 @@ class CameraPreview:
 
 	# Show the output frame
 	def cbShowImage(self):
+		self.cv_image_clone = imutils.resize(
+						self.cv_image.copy(),
+						width=320
+						)
 
-		cv2.imshow("CameraPreview", self.cv_image)
+		cv2.imshow("CameraPreview", self.cv_image_clone)
 		cv2.waitKey(1)
 
 	# Preview image + info
@@ -117,7 +124,10 @@ if __name__ == '__main__':
 	# Initialize
 	rospy.init_node('camera_preview', anonymous=False)
 	camera = CameraPreview()
+	
+	r = rospy.Rate(10)
 
 	# Camera preview
 	while not rospy.is_shutdown():
 		camera.cbPreview()
+		r.sleep()
