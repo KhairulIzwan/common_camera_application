@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ################################################################################
 ## {Description}: Accessing raspicam/usbcam
@@ -37,13 +37,13 @@ class CameraPreview:
 		rospy.on_shutdown(self.cbShutdown)
 
 		# Subscribe to Image msg
-#		self.image_topic = "/cv_camera/image_raw"
-		self.image_topic = "/camera/rgb/image_raw"
+		self.image_topic = "/cv_camera/image_raw"
+#		self.image_topic = "/camera/rgb/image_raw"
 		self.image_sub = rospy.Subscriber(self.image_topic, Image, self.cbImage)
 
 		# Subscribe to CameraInfo msg
-#		self.cameraInfo_topic = "/cv_camera/camera_info"
-		self.cameraInfo_topic = "/camera/rgb/camera_info"
+		self.cameraInfo_topic = "/cv_camera/camera_info"
+#		self.cameraInfo_topic = "/camera/rgb/camera_info"
 		self.cameraInfo_sub = rospy.Subscriber(self.cameraInfo_topic, CameraInfo, 
 			self.cbCameraInfo)
 
