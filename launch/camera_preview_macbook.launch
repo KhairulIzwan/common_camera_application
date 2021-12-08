@@ -6,7 +6,7 @@
 	<!-- COMMON_CAMERA_APPLICATION {CAMERA PREVIEW} -->
 	<node	pkg="common_camera_application" 
 		name="camera_preview_macbook" 
-		type="camera_preview_launch.py"> 
+		type="camera_preview_macbook.py"> 
 		<!-- output="screen"> -->
 	</node>
 
