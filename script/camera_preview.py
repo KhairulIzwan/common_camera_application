@@ -96,12 +96,13 @@ class CameraPreview:
 
 	# Show the output frame
 	def cbShowImage(self):
-		self.cv_image_clone = imutils.resize(
-						self.cv_image.copy(),
-						width=320
-						)
+#		self.cv_image_clone = imutils.resize(
+#						self.cv_image.copy(),
+#						width=320
+#						)
 
-		cv2.imshow("CameraPreview", self.cv_image_clone)
+#		cv2.imshow("CameraPreview", self.cv_image_clone)
+		cv2.imshow("CameraPreview", self.cv_image)
 		cv2.waitKey(1)
 
 	# Preview image + info
