@@ -6,7 +6,7 @@
 	<!-- COMMON_CAMERA_APPLICATION {CAMERA PREVIEW} -->
 	<node	pkg="common_camera_application" 
 		name="camera_preview_nuc" 
-		type="camera_preview.py"> 
+		type="camera_preview_nuc.py"> 
 		<!-- output="screen"> -->
 	</node>
 
