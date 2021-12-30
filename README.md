@@ -1,5 +1,7 @@
 # common_camera_application
 
+**Useful for testing the basic usage of a camera; previewing. Applicable for various types of a camera -- USB-camera, web-cam, raspberry pi, etc**
+
 ```
 .
 ├── CMakeLists.txt
@@ -17,11 +19,16 @@
 
 ```
 
-Created package useful for testing the basic usage of a camera; previewing. Applicable for various types of a camera -- USB-camera, web-cam, raspberry pi, etc
+<!--Created package useful for testing the basic usage of a camera; previewing. Applicable for various types of a camera -- USB-camera, web-cam, raspberry pi, etc-->
 
 **Notes**
-Require(s):
+Required Package(s):
 1. https://github.com/OTL/cv_camera.git
+
+```
+$ cd catkin_ws/src
+$ git clone https://github.com/OTL/cv_camera.git
+```
 
 **STEP TO TURN ON THE CAMERA**
 
