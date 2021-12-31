@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 ################################################################################
-## {Description}: Accessing raspicam/usbcam
+## {Description}: Camera Preview
 ################################################################################
 ## Author: Khairul Izwan Bin Kamsani
 ## Version: {1}.{0}.{0}
@@ -31,21 +31,34 @@ class CameraPreview:
 		self.bridge = CvBridge()
 		self.image_received = False
 
+		# cv2.putText font configuration
+		self.fontFace = cv2.FONT_HERSHEY_DUPLEX
+		self.fontScale = 0.5
+		self.color = (255, 255, 255)
+		self.thickness = 1
+		self.lineType = cv2.LINE_AA
+		self.bottomLeftOrigin = False # if True (text upside down)
+
+		self.timestr = time.strftime("%Y%m%d-%H:%M:%S")
+
 		rospy.logwarn("CameraPreview Node [ONLINE]...")
 
 		# rospy shutdown
 		rospy.on_shutdown(self.cbShutdown)
 
 		# Subscribe to Image msg
-		self.image_topic = "/cv_camera_robot1/image_raw"
-#		self.image_topic = "/camera/rgb/image_raw"
-		self.image_sub = rospy.Subscriber(self.image_topic, Image, self.cbImage)
+		self.image_topic = "/camera_bringup/image_raw"
+		self.image_sub = rospy.Subscriber(
+											self.image_topic, 
+											Image, 
+											self.cbImage)
 
 		# Subscribe to CameraInfo msg
-		self.cameraInfo_topic = "/cv_camera_robot1/camera_info"
-#		self.cameraInfo_topic = "/camera/rgb/camera_info"
-		self.cameraInfo_sub = rospy.Subscriber(self.cameraInfo_topic, CameraInfo, 
-			self.cbCameraInfo)
+		self.cameraInfo_topic = "/camera_bringup/camera_info"
+		self.cameraInfo_sub = rospy.Subscriber(
+											self.cameraInfo_topic, 
+											CameraInfo, 
+											self.cbCameraInfo)
 
 		# Allow up to one second to connection
 		rospy.sleep(2)
@@ -55,9 +68,8 @@ class CameraPreview:
 
 		try:
 			self.cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
-
-			# comment if the image is mirrored
-#			self.cv_image = cv2.flip(self.cv_image, 1)
+			self.cv_image = cv2.flip(self.cv_image, 1)	# comment if the image is mirrored
+			
 		except CvBridgeError as e:
 			print(e)
 
@@ -72,36 +84,48 @@ class CameraPreview:
 		self.imgWidth = msg.width
 		self.imgHeight = msg.height
 
-	# Image information callback
+	# Information on output screen
 	def cbInfo(self):
+	
+		cv2.putText(
+				self.cv_image, 
+				"{}".format(self.timestr), 
+				(10, 20), 
+				self.fontFace, 
+				self.fontScale, 
+				self.color, 
+				self.thickness, 
+				self.lineType, 
+				self.bottomLeftOrigin
+				)
 
-		fontFace = cv2.FONT_HERSHEY_DUPLEX
-		fontScale = 0.5
-		color = (255, 255, 255)
-		thickness = 1
-		lineType = cv2.LINE_AA
-		bottomLeftOrigin = False # if True (text upside down)
+		cv2.putText(
+				self.cv_image, 
+				"Sample", 
+				(10, self.imgHeight-10), 
+				self.fontFace, 
+				self.fontScale, 
+				self.color, 
+				self.thickness, 
+				self.lineType, 
+				self.bottomLeftOrigin
+				)
 
-		self.timestr = time.strftime("%Y%m%d-%H:%M:%S")
-
-		cv2.putText(self.cv_image, "{}".format(self.timestr), (10, 20), 
-			fontFace, fontScale, color, thickness, lineType, 
-			bottomLeftOrigin)
-		cv2.putText(self.cv_image, "Sample", (10, self.imgHeight-10), 
-			fontFace, fontScale, color, thickness, lineType, 
-			bottomLeftOrigin)
-		cv2.putText(self.cv_image, "(%d, %d)" % (self.imgWidth, self.imgHeight), 
-			(self.imgWidth-100, self.imgHeight-10), fontFace, fontScale, 
-			color, thickness, lineType, bottomLeftOrigin)
+		cv2.putText(
+				self.cv_image, 
+				"(%d, %d)" % (self.imgWidth, self.imgHeight), 
+				(self.imgWidth-100, self.imgHeight-10), 
+								self.fontFace, 
+				self.fontScale, 
+				self.color, 
+				self.thickness, 
+				self.lineType, 
+				self.bottomLeftOrigin
+				)
 
 	# Show the output frame
 	def cbShowImage(self):
-#		self.cv_image_clone = imutils.resize(
-#						self.cv_image.copy(),
-#						width=320
-#						)
 
-#		cv2.imshow("CameraPreview", self.cv_image_clone)
 		cv2.imshow("CameraPreview", self.cv_image)
 		cv2.waitKey(1)
 
@@ -126,7 +150,7 @@ if __name__ == '__main__':
 	rospy.init_node('camera_preview', anonymous=False)
 	camera = CameraPreview()
 	
-	r = rospy.Rate(10)
+	r = rospy.Rate(60)
 
 	# Camera preview
 	while not rospy.is_shutdown():

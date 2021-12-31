@@ -1,0 +1,9 @@
+<launch>
+
+	<!-- COMMON_CAMERA_APPLICATION {CAMERA_BRINGUP} -->
+	<include file="$(find common_camera_application)/launch/camera_bringup.launch"/>
+
+	<!-- COMMON_CAMERA_APPLICATION {CAMERA PREVIEW} -->
+	<include file="$(find common_camera_application)/launch/camera_preview.launch"/>
+
+</launch>

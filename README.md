@@ -1,8 +1,26 @@
 # common_camera_application
 
-**Useful for testing the basic usage of a camera; previewing. Applicable for various types of a camera -- USB-camera, web-cam, raspberry pi, etc**
+1. Useful for testing the basic usage of a camera previewing.
 
+2. Applicable for various types of a camera
+	1. USB-camera
+	2. web-cam
+	3. raspberry pi
+
+3. Required Package(s):
+	1. https://github.com/OTL/cv_camera.git
+
+		```
+		
+		$ cd catkin_ws/src
+		$ git clone https://github.com/OTL/cv_camera.git
+		$ catkin_make
+
+		```
+
+4. Code tree:
 ```
+
 .
 ├── CMakeLists.txt
 ├── launch
@@ -19,30 +37,31 @@
 
 ```
 
-<!--Created package useful for testing the basic usage of a camera; previewing. Applicable for various types of a camera -- USB-camera, web-cam, raspberry pi, etc-->
-
-**Notes**
-Required Package(s):
-1. https://github.com/OTL/cv_camera.git
-
-```
-$ cd catkin_ws/src
-$ git clone https://github.com/OTL/cv_camera.git
-```
-
 **STEP TO TURN ON THE CAMERA**
 
-1. **Turn ON the camera**
+1. **Bringup the camera**
 
-	*command* : roslaunch common_camera_application camera_robot.launch 
+```
 
-2. **Preview-ing**
+$ roslaunch common_camera_application camera_bringup.launch 
 
-	*command* : rosrun common_camera_application camera_preview.py
+```
 
-3. **Simplified -- Turn On Camera + Preview** 
+2. **Preview the bringup camera**
 
-	*command* : roslaunch common_camera_application camera_preview.launch
+```
+
+$ roslaunch common_camera_application camera_preview.launch
+
+```
+
+3. **Simplified -- Bringup Camera + Preview** 
+
+```
+
+$ roslaunch common_camera_application camera_bringup_preview.launch
+
+```
 
 **Extra(s)**
 
@@ -69,5 +88,3 @@ $ git clone https://github.com/OTL/cv_camera.git
 	*command* : gu
 
 3. **enter the username and password**
-
-
